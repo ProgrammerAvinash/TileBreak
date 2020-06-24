@@ -66,9 +66,10 @@ setInterval(draw ,10 );
            
             var b = bricks[c][r];
             if(b.status == 1){
-                if(x> b.x && x > b.x+brickWidth && y > b.y&& y > b.y+brickHeight){
+                if(x> b.x && x > b.x+brickWidth && y > b.y&& y < b.y+brickHeight){
                     dy  = -dy;
-                    b.status == 0;
+                    b.status = 0;
+                    
                 }          
             }
       }
