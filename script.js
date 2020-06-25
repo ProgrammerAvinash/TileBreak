@@ -8,7 +8,7 @@ setInterval(draw ,10 );
  let y = canvas.height-30;
  let dx = 2 ;
  let dy = -2 ;
- let ballRadius = 20;
+ let ballRadius = 10;
  let paddleHeight =10;
  let paddleWidth = 75;
  let paddleX = (canvas.width - paddleWidth)/2;
@@ -21,6 +21,8 @@ setInterval(draw ,10 );
  let brickPadding = 5;
  let brickOffSetTop = 30;
  let brickOffSetLeft = 30;
+ let score = 0;
+
 
  var bricks = [];
   for (let c = 0; c < brickColumnCount; c++) {
@@ -60,6 +62,8 @@ setInterval(draw ,10 );
     ctx.closePath();
   }
 
+ 
+  
   function collisionDetection() {
       for (let c = 0; c <brickColumnCount; c++) {          
         for (let r = 0; r <brickRowCount; r++) {
@@ -69,12 +73,23 @@ setInterval(draw ,10 );
                 if(x> b.x && x < b.x+brickWidth && y > b.y&& y < b.y+brickHeight){
                     dy  = -dy;
                     b.status = 0;
+                    score++;
+                    if(score == brickRowCount*brickColumnCount){
+                        alert("YoU WiN! CONGRATS");
+                        document.location.reload();
+                    }
                     
                 }          
             }
       }
       
   }
+}
+function drawScore(){
+    ctx.font = "16px arial";
+    ctx.fillStyle = "#0095dd";
+    ctx.fillText("Score :" +score,8 ,20 );
+
 }
   function drawPaddle(){
     ctx.beginPath(); 
@@ -112,6 +127,7 @@ setInterval(draw ,10 );
     drawBricks();
     drawBall();
     drawPaddle();
+    drawScore()
     collisionDetection();
    
 
